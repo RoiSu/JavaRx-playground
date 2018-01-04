@@ -1,0 +1,58 @@
+package com;
+
+import rx.Subscriber;
+
+import java.util.ArrayList;
+
+/**
+ * Created by rois on 19/09/2017.
+ */
+public class ZipSubscriber {
+
+    public static void main(String[] args) throws InterruptedException {
+
+
+        ArrayList<Long> arr = new ArrayList<Long>();
+        for (int i = 0 ; i < 100 ; i++){
+            arr.add(Long.valueOf(i));
+        }
+
+        ArrayList<Long> arr2 = new ArrayList<Long>();
+        for (int i = 100 ; i < 200 ; i++){
+            arr.add(Long.valueOf(i));
+        }
+
+
+
+
+        Subscriber<String> subscriber = new Subscriber<String>() {
+            public void onCompleted() {
+                System.out.println("completed");
+            }
+
+            public void onError(Throwable e) {
+                System.out.println("error");
+            }
+
+            public void onNext(String text) {
+                request(10);
+                System.out.println(text);
+
+
+            }
+
+
+        };
+
+
+        long start = System.currentTimeMillis();
+        System.out.println(start);
+
+        System.out.println("end " + (System.currentTimeMillis() - start));
+
+
+
+
+        Thread.sleep(100000);
+    }
+}
